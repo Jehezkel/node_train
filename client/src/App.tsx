@@ -7,10 +7,10 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-<div className='text-center'>
-<h1>workss app</h1>
-  <Navbar/>
-</div>
+    <div className="">
+      <Navbar></Navbar>
+      Works
+    </div>
   )
 }
 
