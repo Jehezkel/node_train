@@ -1,7 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-export interface IHomePageProps {
-}
+export interface IHomePageProps {}
 
 export default class HomePage extends React.Component<IHomePageProps> {
   public render() {
