@@ -14,7 +14,6 @@ export default class PostCardVotes extends React.Component<
 > {
   constructor(props: IPostCardVotesProps) {
     super(props);
-
     this.state = { ...this.props, upvotes: this.props.upvotes ?? 0 };
   }
 
