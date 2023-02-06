@@ -32,7 +32,7 @@ export const PostContextProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     PostsService.getPosts().then((resp: any) => setPosts(resp.data));
-  });
+  }, []);
   function addPost(post: IPost) {
     PostsService.create(post).then((response: any) => {
       console.log("Saved succesfully", post);
@@ -56,9 +56,12 @@ export const PostContextProvider = ({ children }: { children: ReactNode }) => {
   function votePost(post: IPost, vote: number) {
     const voteToSubmit = post.user_vote === vote ? 0 : vote;
     PostsService.vote(post, voteToSubmit).then(() => {
-      post.upvotesCnt += vote;
+      post.upvotes_cnt +=
+        post.user_vote === 1 ? -1 : voteToSubmit === 1 ? 1 : 0;
+      post.downvotes_cnt +=
+        post.user_vote === -1 ? -1 : voteToSubmit === -1 ? 1 : 0;
       post.user_vote = voteToSubmit;
-      updatePost(post);
+      setPosts(posts.map((p) => (p.post_id === post.post_id ? post : p)));
     });
   }
   return (

@@ -23,17 +23,17 @@ export default function PostCardVotes(props: IPostCardVotesProps) {
       <span
         onClick={() => votePost(props.post, 1)}
         className={
-          (props.post.user_vote == 1 ? "font-bold text-green-600" : "") +
+          (props.post.user_vote == 1 ? "font-bold text-green-600 " : "") +
           "material-symbols-outlined cursor-pointer "
         }
       >
         keyboard_arrow_up
       </span>
-      <p>{props.post.upvotesCnt}</p>
+      <p>{props.post.upvotes_cnt - props.post.downvotes_cnt}</p>
       <span
         onClick={() => votePost(props.post, -1)}
         className={
-          (props.post.user_vote == -1 ? "font-bold text-red-600" : "") +
+          (props.post.user_vote == -1 ? "font-bold text-red-600 " : "") +
           "material-symbols-outlined cursor-pointer "
         }
       >

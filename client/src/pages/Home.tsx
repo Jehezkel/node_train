@@ -6,11 +6,7 @@ export default function HomePage() {
   return (
     <div>
       <h1>Hello its HomePage speaking.</h1>
-      <PostForm
-        body=""
-        title=""
-        addNewPost={(post: IPost): void => console.log(post)}
-      ></PostForm>
+      <PostForm body="" title=""></PostForm>
     </div>
   );
 }
