@@ -14,13 +14,10 @@
             "program": "${workspaceFolder}/backend/server.js"
         },
         {
-            "type": "node",
+            "type": "node-terminal",
             "request": "launch",
             "name": "Launch App",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/backend/server.js"
+            "command": "npm start dev"
         }
     ]
 }

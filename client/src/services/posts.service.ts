@@ -2,20 +2,26 @@ import IPost from "../models/Post";
 import http from "./api-client.service";
 
 export class PostsService {
-  public baseUrl = "/posts";
-  public async getPosts() {
+  static baseUrl = "/posts";
+  static async getPosts() {
     return http.get<IPost[]>(this.baseUrl);
   }
-  public async getPostById(id: number) {
+  static async getPostById(id: number) {
     return http.get<IPost>(`${this.baseUrl}/${id}`);
   }
-  public async create(post: IPost) {
+  static async create(post: IPost) {
     return http.post<IPost>(this.baseUrl, post);
   }
-  public async delete(id: number) {
+  static async delete(id: number) {
     return http.delete<any>(`${this.baseUrl}/${id}`);
   }
-  public async update(post: IPost) {
+  static async update(post: IPost) {
     return http.put<any>(`${this.baseUrl}/${post.post_id}`, post);
+  }
+  static async vote(post: IPost, vote: number) {
+    return http.post<any>(`${this.baseUrl}/vote`, {
+      post_id: post.post_id,
+      vote: vote,
+    });
   }
 }

@@ -19,11 +19,11 @@ CREATE TABLE comments(
     created_date TIMESTAMP,
     updated_date TIMESTAMP
 );
-CREATE TABLE reactions(
+CREATE TABLE votes(
     post_id INT,
     user_id INT,
-    liked BOOLEAN,
-    disliked BOOLEAN,
+    upvote BOOLEAN,
+    downvote BOOLEAN,
     FOREIGN KEY (post_id) REFERENCES posts (post_id),
     PRIMARY KEY (post_id, user_id)
 );

@@ -1,32 +1,16 @@
-import * as React from "react";
+import { useContext } from "react";
+import { PostContext } from "../context/postContext";
 import IPost from "../models/Post";
-import { PostsService } from "../services/posts.service";
 import PostCard from "./PostCard";
 
-export interface IPostListProps {
-  posts: Array<IPost>;
-}
-
-export interface IPostListState {}
-
-export default class PostList extends React.Component<
-  IPostListProps,
-  IPostListState
-> {
-  postsService: PostsService;
-  constructor(props: IPostListProps) {
-    super(props);
-    this.postsService = new PostsService();
-  }
-
-  public render() {
-    return (
-      <div className="flex flex-col">
-        {this.props.posts &&
-          this.props.posts.map((post: IPost) => (
-            <PostCard post={post} key={post.post_id}></PostCard>
-          ))}
-      </div>
-    );
-  }
+export default function PostList() {
+  const { posts } = useContext(PostContext);
+  return (
+    <div className="flex flex-col">
+      {posts &&
+        posts.map((post: IPost, index) => (
+          <PostCard post={post} key={post.post_id} />
+        ))}
+    </div>
+  );
 }

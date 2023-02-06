@@ -8,4 +8,5 @@ export default interface IPost {
   created_date: EpochTimeStamp;
   updated_by: string;
   updated_date: EpochTimeStamp;
+  user_vote: number;
 }

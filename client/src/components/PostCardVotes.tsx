@@ -1,39 +1,44 @@
 import * as React from "react";
+import { useContext, useState } from "react";
+import { PostContext } from "../context/postContext";
+import IPost from "../models/Post";
+import { PostsService } from "../services/posts.service";
 
 export interface IPostCardVotesProps {
-  upvotes: number;
+  post: IPost;
 }
 
 export interface IPostCardVotesState {
   upvotes: number;
 }
 
-export default class PostCardVotes extends React.Component<
-  IPostCardVotesProps,
-  IPostCardVotesState
-> {
-  constructor(props: IPostCardVotesProps) {
-    super(props);
-    this.state = { ...this.props, upvotes: this.props.upvotes ?? 0 };
-  }
+export default function PostCardVotes(props: IPostCardVotesProps) {
+  // const [votes, setvotes] = useState(props.upvotes);
+  const [currentVote, setCurrentVote] = useState<number>();
+  // function vote(vote: number) {}
+  const { votePost } = useContext(PostContext);
 
-  public render() {
-    return (
-      <div className="flex select-none flex-col items-center">
-        <span
-          onClick={() => this.setState({ upvotes: this.state.upvotes + 1 })}
-          className="material-symbols-outlined cursor-pointer"
-        >
-          keyboard_arrow_up
-        </span>
-        <p>{this.state.upvotes}</p>
-        <span
-          onClick={() => this.setState({ upvotes: this.state.upvotes - 1 })}
-          className="material-symbols-outlined cursor-pointer"
-        >
-          keyboard_arrow_down
-        </span>
-      </div>
-    );
-  }
+  return (
+    <div className="flex select-none flex-col items-center">
+      <span
+        onClick={() => votePost(props.post, 1)}
+        className={
+          (props.post.user_vote == 1 ? "font-bold text-green-600" : "") +
+          "material-symbols-outlined cursor-pointer "
+        }
+      >
+        keyboard_arrow_up
+      </span>
+      <p>{props.post.upvotesCnt}</p>
+      <span
+        onClick={() => votePost(props.post, -1)}
+        className={
+          (props.post.user_vote == -1 ? "font-bold text-red-600" : "") +
+          "material-symbols-outlined cursor-pointer "
+        }
+      >
+        keyboard_arrow_down
+      </span>
+    </div>
+  );
 }
