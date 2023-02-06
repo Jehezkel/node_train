@@ -3,7 +3,23 @@ const pool = require("../database/db");
 
 const getPosts = async (req, res) => {
   try {
-    const allPosts = await pool.query("SELECT * FROM posts");
+    const query = `SELECT p.*, 
+    COALESCE(vc.upvotes_cnt,0)::int upvotes_cnt, 
+    COALESCE(vc.downvotes_cnt,0)::int downvotes_cnt,
+    COALESCE(   
+        (SELECT COUNT(1) FROM comments where post_id=p.post_id),0)::int comments_cnt,
+    COALESCE(
+        (SELECT (upvote::int+downvote::int*-1) from votes where post_id = p.post_id ),0
+    ) user_vote
+    FROM posts p
+    LEFT JOIN (
+        SELECT post_id,  
+        SUM(upvote::int) upvotes_cnt,  
+        SUM(downvote::int) downvotes_cnt
+        FROM votes GROUP BY post_id ) vc ON p.post_id=vc.post_id
+    `;
+    const allPosts = await pool.query(query);
+
     res.json(allPosts.rows);
   } catch (err) {
     console.error(err.message);
