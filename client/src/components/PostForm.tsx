@@ -46,24 +46,30 @@ export default function PostForm(props: IPostFormProps) {
     addPost(postToBeAdded);
   }
   return (
-    <div className="flex h-8 w-full max-w-md flex-col overflow-y-hidden transition-[height]  delay-200 hover:h-36">
-      <form onSubmit={submit}>
-        <div className="h-8">
+    <div className="flex h-full max-h-96 w-full max-w-md flex-col overflow-y-hidden ">
+      <form onSubmit={submit} className="mx-auto flex h-full w-fit flex-col ">
+        <div>
           <input
+            className="w-full rounded-md border border-zinc-500 bg-transparent p-2 outline-none"
             placeholder="Title"
             data-state-prop="title"
             onChange={inputChange}
           ></input>
         </div>
-        <div id="" className="h-8">
+        <div id="" className="mt-4">
           <textarea
             data-state-prop="body"
             onChange={inputChange}
             placeholder="Body"
-            className="h-full"
+            className="w-full rounded-md border border-zinc-500 bg-transparent p-2 outline-none"
           ></textarea>
-          <button type="submit">Save</button>
         </div>
+        <button
+          className="mx-auto mt-auto rounded-md bg-green-600 px-6 py-2"
+          type="submit"
+        >
+          Save
+        </button>
       </form>
     </div>
   );

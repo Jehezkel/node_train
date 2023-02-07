@@ -16,11 +16,9 @@ export default function PostsPage() {
     <PostContextProvider>
       <div className="flex flex-col items-center justify-center">
         <Modal showModal={true} title="MyModal">
-          <div className="h-full">
-            <input type="text" name="" id="" placeholder=" HELLO" />
-          </div>
+          <PostForm body="" title="" />
         </Modal>
-        <PostForm body="" title="" />
+
         <PostList></PostList>
       </div>
     </PostContextProvider>
